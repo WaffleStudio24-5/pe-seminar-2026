@@ -19,7 +19,7 @@ API key 같은 secret은 commit하지 말고, `.gitignore`에 추가 되어있�
 | 회차 | 날짜 | 주제 | 슬라이드 | 과제 | 마감 |
 |---|---|---|---|---|---|
 | 1 | 9/12 (토) 13:00 | 문제 발견과 제품 정의 | [PDF](slides/01-why-product-engineering.pdf) | Pitch & sketch | 9/22 (화) 23:59 |
-| 2 | 9/29 (화) 19:00 · 비대면 | 시스템 설계, 프로젝트 셋업 | — | System design | 10/30 (금) 23:59 |
+| 2 | 9/29 (화) 19:00 · 비대면 | 시스템 설계, 프로젝트 셋업 | [PDF](slides/02-system-design-and-setup.pdf) | [System design](handouts/02-system-design.md) | 10/30 (금) 23:59 |
 | 3 | 10/31 (토) 13:00 | E2E 핵심 기능 구현 | — | E2E | 11/6 (금) 23:59 |
 | 4 | 11/7 (토) 13:00 | MVP 완성 및 검증 | — | MVP | 11/13 (금) 23:59 |
 | 5 | 11/14 (토) 13:00 | iOS/Android 베타 배포와 운영 | — | Beta release | 11/20 (금) 23:59 |
