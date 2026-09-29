@@ -18,6 +18,62 @@
 
 ---
 
+# 0. 먼저 알아보고 정할 것
+
+설계 문서를 쓰기 전에, 스케치에 있는 기능이 **실제로 만들 수 있는지**부터
+확인한다. 여기서 나온 답이 설계 문서의 Overview와 Decisions가 된다.
+
+## Expo로 이 기능을 할 수 있나
+
+기능마다 이 순서로 확인한다.
+
+1. **Expo에 들어 있나?** 카메라, 위치, 알림, 센서 등.
+   [Expo SDK 문서](https://docs.expo.dev/versions/latest/)에서 찾는다. 페이지 맨 위에
+   지원 플랫폼(Android · iOS · Web)이 표시돼 있다.
+2. **없으면 라이브러리를 찾는다.** [React Native Directory](https://reactnative.directory/packages?expoGo=true)에서
+   검색하고, **Filters → Compatibility → Works with Expo Go**를 체크한다. 이 링크는 이미 체크된 상태로 열린다.
+3. **체크한 목록에 없으면 development build가 필요하다.**
+   판단 기준: [Expo — Using third-party libraries](https://docs.expo.dev/workflow/using-libraries/)
+
+설치는 `npm install` 대신 `npx expo install 라이브러리` 로 한다. 내 Expo 버전에
+맞는 버전을 골라 준다.
+
+기능마다 표로 정리해 두면 좋다:
+
+| 기능 | 쓸 것 | Expo Go에서 되나 | iOS / Android | 필요한 권한·심사 |
+|---|---|---|---|---|
+| (예) 현재 위치 | `expo-location` | 된다 | 둘 다 | 위치 권한 |
+
+## Expo Go와 development build
+
+- **Expo Go로 시작한다.** 폰에 Expo Go 앱을 깔고, 노트북에서 `npx expo start` 후
+  QR을 찍으면 된다. 코드를 저장하면 폰에 바로 반영된다.
+- 위 표에서 **Expo Go에서 안 되는 게 하나라도 있으면** development build로 넘어간다.
+  "내 앱 전용 Expo Go"를 한 번 빌드해서 설치하는 것이고, 그 뒤로 작업 방식은 같다.
+  네이티브 라이브러리를 추가할 때만 다시 빌드한다.
+  [Expo — Create a development build](https://docs.expo.dev/develop/development-builds/create-a-build/)
+- **Android:** 무료. EAS로 클라우드 빌드한 APK를 바로 깔거나, `npx expo run:android --device`.
+- **iPhone:** 두 가지 방법이 있다.
+  - **Mac + Xcode가 있으면 무료:** `npx expo run:ios --device`, 무료 Apple ID(Personal Team)로 서명.
+    7일마다 다시 설치해야 하고, 푸시 알림·위젯(App Groups)·HealthKit·백그라운드 모드는 안 된다.
+  - **그 외:** 유료 Apple Developer 계정으로 EAS 클라우드 빌드.
+- 노트북에서도 확인할 수 있다. `npx expo start` 후 `i`는 iOS 시뮬레이터(Mac + Xcode),
+  `a`는 Android 에뮬레이터(Android Studio). 다만 위치·알림·카메라처럼 폰 기능이 핵심이면
+  실제 폰으로 확인한다.
+  [Expo — Set up your environment](https://docs.expo.dev/get-started/set-up-your-environment/)
+
+## 정할 것
+
+- **플랫폼:** iOS · Android · 둘 다. 11/14 배포 회차에 어디로 낼지까지 생각한다.
+- **Expo Go로 충분한가, development build가 필요한가**
+- **백엔드가 필요한가:** 데이터가 폰을 떠나야 하나, 비밀 키가 필요한가, 사용자 없이 바뀌는 데이터가 있나
+- **데이터를 어디에 두나:** 폰(AsyncStorage · SQLite · SecureStore) 또는 Convex
+  사진·파일은 데이터베이스가 아니라 파일 저장소(Convex file storage)에 두고, 테이블에는 그 링크만 저장한다.
+- **데이터를 어디서 가져오나:** 그리고 언제(한 번 · 주기적으로 · 요청할 때)
+- **로그인이 필요한가**
+
+---
+
 # 1. 설계 문서
 
 `docs/02-system-design.md` · **800단어 이하**, 다이어그램 별도.
@@ -120,7 +176,7 @@ npx expo start
 ## ③ Convex 연결 (백엔드가 필요하면)
 
 ```bash
-npm install convex
+npx expo install convex
 npx convex dev
 ```
 
@@ -239,6 +295,7 @@ build에서 **그 권한이 실제로 동작하는 화면 녹화**가 증명이�
 |---|---|
 | 프론트엔드·백엔드가 뭔지 | [Software Engineering for Vibe Coders](https://technically.dev/learning-tracks/software-engineering-for-vibe-coders), technically.dev |
 | Convex를 처음 쓴다 | [Convex tutorial](https://docs.convex.dev/tutorial/) — 한 시간이면 된다 |
+| Expo로 이 기능이 되나 | [Expo SDK](https://docs.expo.dev/versions/latest/) · [React Native Directory](https://reactnative.directory/) |
 | Expo + Convex 연결 | [React Native quickstart](https://docs.convex.dev/quickstart/react-native) |
 | 폰에 데이터 저장 | [Expo — Store data](https://docs.expo.dev/develop/user-interface/store-data/) |
 | 비밀 키를 어디에 | [Expo — Environment variables](https://docs.expo.dev/guides/environment-variables/) · [Convex — Environment variables](https://docs.convex.dev/production/environment-variables) |
