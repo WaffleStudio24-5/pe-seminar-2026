@@ -22,5 +22,5 @@ API key 같은 secret은 commit하지 말고, `.gitignore`에 추가 되어있�
 | 2 | 9/29 (화) 19:00 · 비대면 | 시스템 설계, 프로젝트 셋업 | [PDF](slides/02-system-design-and-setup.pdf) | [System design](handouts/02-system-design.md) | 10/30 (금) 23:59 |
 | 3 | 10/31 (토) 13:00 | E2E 핵심 기능 구현 | [PDF](slides/03-build-end-to-end.pdf) | E2E | 11/6 (금) 23:59 |
 | 4 | 11/7 (토) 13:00 | MVP 완성 및 검증 | [PDF](slides/04-ship-to-testers.pdf) | MVP | 11/13 (금) 23:59 |
-| 5 | 11/14 (토) 13:00 | iOS/Android 베타 배포와 운영 | — | Beta release | 11/20 (금) 23:59 |
+| 5 | 11/14 (토) 13:00 | iOS/Android 베타 배포와 운영 | [PDF](slides/05-run-it.pdf) | 데모 준비 (제출 없음) | — |
 | 6 | 11/21 (토) 13:00 | 제품 시연, 발표 | — | | |
